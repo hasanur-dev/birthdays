@@ -9,13 +9,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { addBirthday } from "../services/apiBirthdays";
 import Spinner from "./Spinner";
-
+import { RxCross2 } from "react-icons/rx";
+import { ImCross } from "react-icons/im";
 export default function AddBirthday({ handleShowAdd }) {
   const [startDate, setStartDate] = useState(new Date());
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const queryClient = useQueryClient();
-
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const { mutate, isPending } = useMutation({
     mutationFn: addBirthday,
     onSuccess: () => {
@@ -23,7 +24,10 @@ export default function AddBirthday({ handleShowAdd }) {
       queryClient.invalidateQueries(["birthdays"]);
     },
   });
-
+  const handleClear = () => {
+    setImagePreviewUrl("");
+    setImage("");
+  };
   const handleSubmit = (e) => {
     // console.log(typeof startDate);
     e.preventDefault();
@@ -40,6 +44,9 @@ export default function AddBirthday({ handleShowAdd }) {
       toast.error("Invalid file type");
       return;
     }
+    const previewUrl = URL.createObjectURL(image);
+    console.log(previewUrl);
+    setImagePreviewUrl(previewUrl);
     // const imageSize = image.size / 1000;
     // if (imageSize > 2000) {
     //   // toast.error("Max file size is 2MB");
@@ -82,16 +89,33 @@ export default function AddBirthday({ handleShowAdd }) {
           />
         </div>
         <div>
-          <input
-            onChange={handleImage}
-            type="file"
-            className=" bg-transparent py-1 text-lg outline-none"
-            disabled={isPending}
-          />
+          {image ? (
+            <div className="flex items-center justify-between">
+              <img
+                src={imagePreviewUrl}
+                className="aspect-square h-20 rounded-full border-2 border-accent bg-center object-cover"
+                alt=""
+              />{" "}
+              <button
+                className="rounded-md bg-accent-two px-4 py-2 font-sometype text-sm font-semibold text-gray-800"
+                type="button"
+                onClick={handleClear}
+              >
+                Clear
+              </button>
+            </div>
+          ) : (
+            <input
+              onChange={handleImage}
+              type="file"
+              className=" bg-transparent py-1 text-lg outline-none"
+              disabled={isPending}
+            />
+          )}
         </div>
         <button
           disabled={isPending}
-          className="mt-5 rounded-md bg-accent py-2 font-sometype text-lg font-bold text-gray-900"
+          className="mt-5 rounded-md border-2 border-accent bg-accent py-2 font-sometype text-lg font-bold text-gray-900 transition-colors duration-300 hover:bg-transparent hover:text-accent"
         >
           {isPending ? <Spinner /> : "Add"}
         </button>
@@ -99,9 +123,9 @@ export default function AddBirthday({ handleShowAdd }) {
           onClick={handleShowAdd}
           type="button"
           disabled={isPending}
-          className="absolute right-0 top-0 w-12 rounded-md bg-accent py-2 font-sometype text-lg font-bold text-gray-900"
+          className="absolute right-0 top-0 flex  justify-center rounded-sm border-2 border-accent bg-accent p-1 font-sometype text-lg font-bold text-gray-900 transition-colors duration-300 hover:bg-transparent hover:text-accent"
         >
-          X
+          <RxCross2 className="text-xl font-black" />
         </button>
       </form>
     </div>

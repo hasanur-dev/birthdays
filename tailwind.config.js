@@ -14,7 +14,7 @@ export default {
         "secondary-color": "#16262E",
         accent: "#CB9CF2",
         // accent: "#E5D4ED",
-        "accent-two": "#CB9CF2",
+        "accent-two": "#E5D4ED",
       },
     },
   },
