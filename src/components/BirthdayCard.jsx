@@ -22,7 +22,11 @@ export default function BirthdayCard({ info }) {
   const year = date.getFullYear();
 
   return (
-    <div className="flex items-center gap-5 rounded-sm bg-gray-800 p-3 text-gray-100 shadow-md">
+    <div className="flex items-center gap-5 rounded-sm bg-gray-800 p-3 pl-4 text-gray-100 shadow-md">
+      <div>
+        <p className="font-sometype text-2xl font-semibold">{dayOfMonth}</p>
+      </div>
+      <div className="h-8 w-[1px] bg-gray-400/20"></div>
       <div>
         <img
           src={info.image}
