@@ -25,7 +25,7 @@ export default function Home() {
   // console.log(data);
   let filteredData = data ? groupByMonth(data) : [];
   // let filteredData = ;
-  console.log(filteredData);
+  // console.log(filteredData);
 
   return (
     <div className=" min-h-dvh bg-gray-900 px-6 py-14 font-mulish ">

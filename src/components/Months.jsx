@@ -1,7 +1,7 @@
 import BirthdayCard from "./BirthdayCard";
 
 export default function Months({ data }) {
-  //   console.log(data);
+  // console.log(data);
   const { month, values } = data;
   return (
     <div className="flex flex-col gap-2">

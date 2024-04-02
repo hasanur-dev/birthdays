@@ -58,7 +58,7 @@ export default function AddBirthday({ handleShowAdd }) {
   };
 
   return (
-    <div className="fixed inset-0 z-30 bg-gray-900 px-4  py-16 backdrop-blur-sm">
+    <div className="fixed inset-0 z-30 bg-gray-900 px-4 py-16 backdrop-blur-sm">
       <form
         onSubmit={handleSubmit}
         className="relative  mx-auto flex max-w-96 flex-col gap-10 py-16 font-mulish text-lg text-gray-100"
